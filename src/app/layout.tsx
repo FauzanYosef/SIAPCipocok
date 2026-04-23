@@ -10,16 +10,13 @@ const dmsans = DM_Sans({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
-  session,
 }: Readonly<{
   children: React.ReactNode;
-  session: any;
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${dmsans.className}`}>
         <AuthDialogProvider>
-          <SessionProviderComp session={session}>
             <ThemeProvider
               attribute="class"
               enableSystem={false}
@@ -30,7 +27,6 @@ export default function RootLayout({
               <Footer />
               <ScrollToTop />
             </ThemeProvider>
-          </SessionProviderComp>
         </AuthDialogProvider>
       </body>
     </html>
