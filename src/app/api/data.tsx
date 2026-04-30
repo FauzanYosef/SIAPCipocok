@@ -1,5 +1,128 @@
 import { text } from "stream/consumers";
 
+
+// src/data/statistik.ts
+
+/* =========================
+   JENIS KELAMIN
+========================= */
+export const genderData = [
+  { name: "Laki-laki", value: 8131 },
+  { name: "Perempuan", value: 7811 },
+];
+
+/* =========================
+   USIA SEKOLAH
+========================= */
+export const schoolAgeData = [
+  { name: "SD", value: 1742 },
+  { name: "SMP", value: 852 },
+  { name: "SMA", value: 797 },
+  { name: "Perguruan Tinggi", value: 1624 },
+];
+
+/* =========================
+   PENDIDIKAN
+========================= */
+export const educationData = [
+  { name: "Tidak/Belum Sekolah", value: 4596 },
+  { name: "Belum Tamat SD", value: 962 },
+  { name: "Tamat SD", value: 2385 },
+  { name: "Tamat SLTP", value: 1566 },
+  { name: "Tamat SLTA", value: 3929 },
+  { name: "D I/II", value: 106 },
+  { name: "DIII", value: 314 },
+  { name: "DIV/S1", value: 1824 },
+  { name: "S2", value: 244 },
+  { name: "S3", value: 16 },
+];
+
+/* =========================
+   DISABILITAS
+========================= */
+export const disabilityData = [
+  { name: "Fisik", value: 8 },
+  { name: "Netra", value: 1 },
+  { name: "Rungu/Wicara", value: 2 },
+  { name: "Mental/Jiwa", value: 13 },
+  { name: "Fisik & Mental", value: 1 },
+];
+
+/* =========================
+   AGAMA
+========================= */
+export const religionData = [
+  { name: "Islam", value: 15728 },
+  { name: "Kristen", value: 95 },
+  { name: "Katholik", value: 63 },
+  { name: "Hindu", value: 4 },
+  { name: "Budha", value: 52 },
+  { name: "Konghucu", value: 0 },
+];
+
+/* =========================
+   PEKERJAAN
+========================= */
+export const jobData = [
+  { name: "Tidak Bekerja", value: 4819 },
+  { name: "Mengurus Rumah Tangga", value: 3103 },
+  { name: "Pelajar/Mahasiswa", value: 2731 },
+  { name: "Pensiunan", value: 152 },
+  { name: "PNS", value: 753 },
+  { name: "TNI", value: 16 },
+  { name: "POLRI", value: 123 },
+  { name: "Petani", value: 12 },
+  { name: "Wiraswasta", value: 1033 },
+  { name: "Karyawan Swasta", value: 1244 },
+  { name: "Karyawan BUMN", value: 75 },
+  { name: "Karyawan BUMD", value: 27 },
+  { name: "Buruh Harian Lepas", value: 1305 },
+  { name: "Dosen", value: 34 },
+  { name: "Guru", value: 110 },
+  { name: "Dokter", value: 32 },
+  { name: "Bidan", value: 39 },
+  { name: "Perawat", value: 20 },
+  { name: "Apoteker", value: 3 },
+];
+
+/* =========================
+   SARANA PENDIDIKAN
+========================= */
+export const facilityData = [
+  { name: "PAUD", value: 0 },
+  { name: "TK", value: 0 },
+  { name: "SD", value: 0 },
+  { name: "SMP", value: 0 },
+  { name: "SMA", value: 0 },
+  { name: "Madrasah", value: 0 },
+  { name: "Pondok Pesantren", value: 0 },
+];
+
+/* =========================
+   TEMPAT IBADAH
+========================= */
+export const worshipData = [
+  { name: "Masjid", value: 0 },
+  { name: "Mushola", value: 0 },
+  { name: "Gereja", value: 0 },
+  { name: "Kuil", value: 0 },
+  { name: "Wihara", value: 0 },
+  { name: "Pura", value: 0 },
+];
+
+/* =========================
+   SUMMARY
+========================= */
+export const summaryData = {
+  totalPenduduk: 15942,
+  lakiLaki: 8131,
+  perempuan: 7811,
+  rw: 15,
+  rt: 58,
+  kk: 3210,
+};
+
+
 //hero
 export const Heroimage = [
   {
