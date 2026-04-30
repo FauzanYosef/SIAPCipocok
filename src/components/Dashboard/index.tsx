@@ -88,7 +88,7 @@ const stats = [
   },
 ];
 
-const COLORS = ["#6366F1", "#EC4899", "#10B981", "#F59E0B", "#06B6D4"];
+const COLORS = ["#6366F1", "#EC4899", "#10B981", "#F59E0B", "#06B6D4, #6366F1", "#EC4899", "#10B981", "#F59E0B", "#06B6D4"];
 
 /* =========================
    HELPER FORMAT
@@ -122,7 +122,7 @@ const Statistik = () => {
     children: React.ReactNode;
   }) => (
     <div className="bg-white dark:bg-[#111827] p-8 rounded-2xl shadow-sm">
-      <h4 className="mb-4 text-sm font-semibold text-primary">
+      <h4 className="mb-10 text-[18px] font-medium text-primary">
         {title}
       </h4>
       <div className="h-[300px]">{children}</div>
@@ -175,117 +175,140 @@ const Statistik = () => {
         </div>
 
         {/* CHARTS */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
-          {/* GENDER */}
-          <ChartCard title="Distribusi Jenis Kelamin">
-            <ResponsiveContainer>
-              <PieChart>
-                <Pie
-                  data={genderData}
-                  dataKey="value"
-                  innerRadius={60}
-                >
-                  {genderData.map((_, i) => (
-                    <Cell key={i} fill={COLORS[i]} />
-                  ))}
-                </Pie>
-                <Tooltip formatter={formatNumber} />
-              </PieChart>
-            </ResponsiveContainer>
-          </ChartCard>
+  {/* REUSABLE MODERN CARD */}
+  {[
+    {
+      title: "Distribusi Jenis Kelamin",
+      content: (
+        <PieChart>
+          <Pie data={genderData} dataKey="value" innerRadius={70} outerRadius={100}>
+            {genderData.map((_, i) => (
+              <Cell key={i} fill={COLORS[i]} />
+            ))}
+          </Pie>
+          <Tooltip formatter={formatNumber} />
+        </PieChart>
+      ),
+    },
+    {
+      title: "Tingkat Pendidikan",
+      content: (
+        <BarChart data={educationData}>
+          <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
+          <XAxis dataKey="name" hide />
+          <YAxis />
+          <Tooltip formatter={formatNumber} />
+          <Bar dataKey="value" radius={[12, 12, 0, 0]}>
+            {educationData.map((_, i) => (
+              <Cell key={i} fill={COLORS[i]} />
+            ))}
+          </Bar>
+        </BarChart>
+      ),
+    },
+    {
+      title: "Usia Sekolah",
+      content: (
+        <BarChart data={schoolAgeData}>
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip formatter={formatNumber} />
+          <Bar dataKey="value" radius={[12, 12, 0, 0]}>
+            {schoolAgeData.map((_, i) => (
+              <Cell key={i} fill={COLORS[i]} />
+            ))}
+          </Bar>
+        </BarChart>
+      ),
+    },
+    {
+      title: "Agama",
+      content: (
+        <PieChart>
+          <Pie
+            data={religionData}
+            dataKey="value"
+            innerRadius={60}
+            outerRadius={100}
+            paddingAngle={2}
+            label={({ percent = 0 }) =>
+              percent > 0.05 ? `${(percent * 100).toFixed(0)}%` : ""
+            }
+          >
+            {religionData.map((_, i) => (
+              <Cell key={i} fill={COLORS[i % COLORS.length]} />
+            ))}
+          </Pie>
+          <Tooltip formatter={formatNumber} />
+        </PieChart>
+      ),
+    },
+    {
+      title: "Pekerjaan",
+      content: (
+        <BarChart data={jobData.slice(0, 8)}>
+          <XAxis dataKey="name" hide />
+          <YAxis />
+          <Tooltip formatter={formatNumber} />
+          <Bar dataKey="value" radius={[12, 12, 0, 0]}>
+            {jobData.slice(0, 8).map((_, i) => (
+              <Cell key={i} fill={COLORS[i]} />
+            ))}
+          </Bar>
+        </BarChart>
+      ),
+    },
+    {
+      title: "Disabilitas",
+      content: (
+        <PieChart>
+          <Pie data={disabilityData} dataKey="value" innerRadius={60}>
+            {disabilityData.map((_, i) => (
+              <Cell key={i} fill={COLORS[i]} />
+            ))}
+          </Pie>
+          <Tooltip formatter={formatNumber} />
+        </PieChart>
+      ),
+    },
+  ].map((chart, i) => (
+    <motion.div
+      key={i}
+      {...fadeUp(i)}
+      whileHover={{ y: -4 }}
+      className="
+        group relative rounded-3xl p-[1px]
+        bg-gradient-to-br from-primary/20 via-transparent to-transparent
+      "
+    >
+      <div
+        className="
+          bg-white/80 dark:bg-[#111827]/80
+          backdrop-blur-xl
+          rounded-3xl p-6
+          shadow-sm hover:shadow-lg
+          transition-all duration-300
+          border border-white/20 dark:border-white/10
+        "
+      >
+        {/* TITLE */}
+        <h4 className="text-sm font-medium text-gray-600 dark:text-gray-300 mb-4">
+          {chart.title}
+        </h4>
 
-          {/* PENDIDIKAN */}
-          <ChartCard title="Tingkat Pendidikan">
-            <ResponsiveContainer>
-              <BarChart data={educationData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" hide />
-                <YAxis />
-                <Tooltip formatter={formatNumber} />
-                <Bar dataKey="value" radius={[10, 10, 0, 0]}>
-                  {educationData.map((_, i) => (
-                    <Cell key={i} fill={COLORS[i]} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </ChartCard>
-
-          {/* USIA SEKOLAH */}
-          <ChartCard title="Usia Sekolah">
-            <ResponsiveContainer>
-              <BarChart data={schoolAgeData}>
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip formatter={formatNumber} />
-                <Bar dataKey="value" radius={[10, 10, 0, 0]}>
-                  {schoolAgeData.map((_, i) => (
-                    <Cell key={i} fill={COLORS[i]} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </ChartCard>
-
-          {/* AGAMA */}
-          <ChartCard title="Agama">
-            <ResponsiveContainer>
-              <PieChart>
-                <Pie
-                  data={religionData}
-                  dataKey="value"
-                  nameKey="name"
-                  innerRadius={50}
-                  outerRadius={90}
-                  paddingAngle={3}
-                  label={({ name, percent = 0 }) =>
-                    `${name} ${(percent * 100).toFixed(0)}%`
-                  }
-                >
-                  {religionData.map((_, i) => (
-                    <Cell
-                      key={i}
-                      fill={COLORS[i % COLORS.length]}
-                    />
-                  ))}
-                </Pie>
-                <Tooltip formatter={formatNumber} />
-              </PieChart>
-            </ResponsiveContainer>
-          </ChartCard>
-
-          {/* PEKERJAAN */}
-          <ChartCard title="Pekerjaan">
-            <ResponsiveContainer>
-              <BarChart data={jobData.slice(0, 8)}>
-                <XAxis dataKey="name" hide />
-                <YAxis />
-                <Tooltip formatter={formatNumber} />
-                <Bar dataKey="value">
-                  {jobData.slice(0, 8).map((_, i) => (
-                    <Cell key={i} fill={COLORS[i]} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </ChartCard>
-
-          {/* DISABILITAS */}
-          <ChartCard title="Disabilitas">
-            <ResponsiveContainer>
-              <PieChart>
-                <Pie data={disabilityData} dataKey="value">
-                  {disabilityData.map((_, i) => (
-                    <Cell key={i} fill={COLORS[i]} />
-                  ))}
-                </Pie>
-                <Tooltip formatter={formatNumber} />
-              </PieChart>
-            </ResponsiveContainer>
-          </ChartCard>
-
+        {/* CHART */}
+        <div className="h-[300px]">
+          <ResponsiveContainer>
+            {chart.content}
+          </ResponsiveContainer>
         </div>
+      </div>
+    </motion.div>
+  ))}
+
+</div>
       </div>
     </section>
   );
