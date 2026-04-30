@@ -91,6 +91,14 @@ const stats = [
 const COLORS = ["#6366F1", "#EC4899", "#10B981", "#F59E0B", "#06B6D4"];
 
 /* =========================
+   HELPER FORMAT
+========================= */
+const formatNumber = (value: any) =>
+  typeof value === "number"
+    ? value.toLocaleString("id-ID")
+    : value;
+
+/* =========================
    COMPONENT
 ========================= */
 const Statistik = () => {
@@ -113,8 +121,10 @@ const Statistik = () => {
     title: string;
     children: React.ReactNode;
   }) => (
-    <div className="bg-white dark:bg-[#111827] p-10 rounded-3xl shadow-md">
-      <h4 className="mb-4 py-3 text-md font-small text-primary">{title}</h4>
+    <div className="bg-white dark:bg-[#111827] p-8 rounded-2xl shadow-sm">
+      <h4 className="mb-4 text-sm font-semibold text-primary">
+        {title}
+      </h4>
       <div className="h-[300px]">{children}</div>
     </div>
   );
@@ -127,30 +137,30 @@ const Statistik = () => {
         <motion.div
           initial={{ y: -30, opacity: 0 }}
           animate={inView ? { y: 0, opacity: 1 } : {}}
-          className="text-center mb-20"
+          className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">
             <span className="text-primary">Dashboard Statistik</span> Kelurahan
           </h2>
-          <p className="mt-4 text-gray-500 dark:text-white/70">
+          <p className="mt-3 text-gray-500 dark:text-white/70">
             Data penduduk & visualisasi statistik
           </p>
         </motion.div>
 
-        {/* =========================
-            KPI
-        ========================= */}
+        {/* KPI */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {stats.map((item, index) => (
             <motion.div
               key={index}
               {...fadeUp(index)}
               whileHover={{ scale: 1.03 }}
-              className="bg-white dark:bg-[#111827] rounded-2xl p-6 shadow-sm "
+              className="bg-white dark:bg-[#111827] rounded-2xl p-6 shadow-sm"
             >
               <div className="flex justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">{item.title}</p>
+                  <p className="text-sm text-gray-500">
+                    {item.title}
+                  </p>
                   <h3 className="text-2xl font-bold mt-2 text-primary dark:text-white">
                     <Counter value={item.value} />
                   </h3>
@@ -164,21 +174,23 @@ const Statistik = () => {
           ))}
         </div>
 
-        {/* =========================
-            CHARTS
-        ========================= */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 text-primary">
+        {/* CHARTS */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
           {/* GENDER */}
           <ChartCard title="Distribusi Jenis Kelamin">
             <ResponsiveContainer>
               <PieChart>
-                <Pie data={genderData} dataKey="value" innerRadius={60}>
+                <Pie
+                  data={genderData}
+                  dataKey="value"
+                  innerRadius={60}
+                >
                   {genderData.map((_, i) => (
                     <Cell key={i} fill={COLORS[i]} />
                   ))}
                 </Pie>
-                <Tooltip />
+                <Tooltip formatter={formatNumber} />
               </PieChart>
             </ResponsiveContainer>
           </ChartCard>
@@ -190,7 +202,7 @@ const Statistik = () => {
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" hide />
                 <YAxis />
-                <Tooltip />
+                <Tooltip formatter={formatNumber} />
                 <Bar dataKey="value" radius={[10, 10, 0, 0]}>
                   {educationData.map((_, i) => (
                     <Cell key={i} fill={COLORS[i]} />
@@ -206,8 +218,8 @@ const Statistik = () => {
               <BarChart data={schoolAgeData}>
                 <XAxis dataKey="name" />
                 <YAxis />
-                <Tooltip />
-                <Bar dataKey="value" radius={[20, 20, 0, 0]}>
+                <Tooltip formatter={formatNumber} />
+                <Bar dataKey="value" radius={[10, 10, 0, 0]}>
                   {schoolAgeData.map((_, i) => (
                     <Cell key={i} fill={COLORS[i]} />
                   ))}
@@ -216,32 +228,32 @@ const Statistik = () => {
             </ResponsiveContainer>
           </ChartCard>
 
-         {/* AGAMA */}
-        <ChartCard title="Agama">
-        <ResponsiveContainer>
-            <PieChart>
-            <Pie
-                data={religionData}
-                dataKey="value"
-                nameKey="name"
-                cx="50%"
-                cy="50%"
-                innerRadius={50}
-                outerRadius={90}
-                paddingAngle={3}
-                label={({ name, percent }) =>
-                `${name} ${(percent * 100).toFixed(0)}%`
-                }
-            >
-                {religionData.map((_, i) => (
-                <Cell key={i} fill={COLORS[i % COLORS.length]} />
-                ))}
-            </Pie>
-
-            <Tooltip formatter={(value: number) => value.toLocaleString("id-ID")} />
-            </PieChart>
-        </ResponsiveContainer>
-        </ChartCard>
+          {/* AGAMA */}
+          <ChartCard title="Agama">
+            <ResponsiveContainer>
+              <PieChart>
+                <Pie
+                  data={religionData}
+                  dataKey="value"
+                  nameKey="name"
+                  innerRadius={50}
+                  outerRadius={90}
+                  paddingAngle={3}
+                  label={({ name, percent = 0 }) =>
+                    `${name} ${(percent * 100).toFixed(0)}%`
+                  }
+                >
+                  {religionData.map((_, i) => (
+                    <Cell
+                      key={i}
+                      fill={COLORS[i % COLORS.length]}
+                    />
+                  ))}
+                </Pie>
+                <Tooltip formatter={formatNumber} />
+              </PieChart>
+            </ResponsiveContainer>
+          </ChartCard>
 
           {/* PEKERJAAN */}
           <ChartCard title="Pekerjaan">
@@ -249,7 +261,7 @@ const Statistik = () => {
               <BarChart data={jobData.slice(0, 8)}>
                 <XAxis dataKey="name" hide />
                 <YAxis />
-                <Tooltip />
+                <Tooltip formatter={formatNumber} />
                 <Bar dataKey="value">
                   {jobData.slice(0, 8).map((_, i) => (
                     <Cell key={i} fill={COLORS[i]} />
@@ -268,13 +280,12 @@ const Statistik = () => {
                     <Cell key={i} fill={COLORS[i]} />
                   ))}
                 </Pie>
-                <Tooltip />
+                <Tooltip formatter={formatNumber} />
               </PieChart>
             </ResponsiveContainer>
           </ChartCard>
 
         </div>
-
       </div>
     </section>
   );
