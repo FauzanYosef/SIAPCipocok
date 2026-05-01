@@ -5,16 +5,16 @@ export const headerData: HeaderItem[] = [
   { label: "Dashboard", href: "/dashboard" },
 
   { label: "Profil", 
-    href: "/profil", 
+    href: "#", 
     submenu:[
-      { label: "Sejarah", href:"/profil/sejarah"},
-      { label: "Visi dan Misi", href:"/profil/visi"},
-      { label: "Struktur Organisasi", href:"/profil/struktur"},
+      { label: "Sejarah", href:"/profile/sejarah"},
+      { label: "Visi dan Misi", href:"/profile/visi"},
+      { label: "Struktur Organisasi", href:"/profile/organisasi"},
     ]
   },
 
   { label: " Layanan", 
-    href: "/Layanan",
+    href: "/layanan",
   },
 
   { label: "Berita", href: "/berita" },

@@ -88,7 +88,13 @@ const stats = [
   },
 ];
 
-const COLORS = ["#6366F1", "#EC4899", "#10B981", "#F59E0B", "#06B6D4, #6366F1", "#EC4899", "#10B981", "#F59E0B", "#06B6D4"];
+const COLORS = [
+  "#6366F1",
+  "#EC4899",
+  "#10B981",
+  "#F59E0B",
+  "#06B6D4",
+];
 
 /* =========================
    HELPER FORMAT
@@ -223,43 +229,103 @@ const Statistik = () => {
         </BarChart>
       ),
     },
-    {
-      title: "Agama",
-      content: (
-        <PieChart>
-          <Pie
-            data={religionData}
-            dataKey="value"
-            innerRadius={60}
-            outerRadius={100}
-            paddingAngle={2}
-            label={({ percent = 0 }) =>
-              percent > 0.05 ? `${(percent * 100).toFixed(0)}%` : ""
-            }
+  {
+  title: "Agama",
+  content: (
+    <div className="h-full grid grid-cols-2 gap-8 items-start">
+
+      {/* LEFT - CHART */}
+      <div className="flex items-start justify-start w-full">
+        <div className="relative w-[250px] h-[250px]">
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Pie
+                data={religionData}
+                dataKey="value"
+                nameKey="name"
+                innerRadius={50}
+                outerRadius={75}
+                paddingAngle={4}
+              >
+                {religionData.map((_, i) => (
+                  <Cell key={i} fill={COLORS[i % COLORS.length]} />
+                ))}
+              </Pie>
+              <Tooltip formatter={formatNumber} />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+
+      {/* RIGHT - LEGEND */}
+      <div className="flex flex-col gap-2 w-full">
+        {religionData.map((item, i) => (
+          <div
+            key={i}
+            className="
+              flex items-center justify-between
+              px-3 py-2 rounded-lg
+              bg-gray-50 dark:bg-white/5
+              hover:bg-gray-100 dark:hover:bg-white/10
+              transition
+            "
           >
-            {religionData.map((_, i) => (
-              <Cell key={i} fill={COLORS[i % COLORS.length]} />
-            ))}
-          </Pie>
-          <Tooltip formatter={formatNumber} />
-        </PieChart>
-      ),
-    },
+            <div className="flex items-center gap-2">
+              <span
+                className="w-3 h-3 rounded-full"
+                style={{ backgroundColor: COLORS[i % COLORS.length] }}
+              />
+              <span className="text-xs text-gray-700 dark:text-gray-300">
+                {item.name}
+              </span>
+            </div>
+
+            <span className="text-xs font-semibold text-gray-900 dark:text-white">
+              {item.value.toLocaleString("id-ID")}
+            </span>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  ),
+},
+
     {
-      title: "Pekerjaan",
-      content: (
-        <BarChart data={jobData.slice(0, 8)}>
-          <XAxis dataKey="name" hide />
-          <YAxis />
-          <Tooltip formatter={formatNumber} />
-          <Bar dataKey="value" radius={[12, 12, 0, 0]}>
-            {jobData.slice(0, 8).map((_, i) => (
-              <Cell key={i} fill={COLORS[i]} />
+    title: "Pekerjaan",
+    content: (
+        <ResponsiveContainer width="100%" height={jobData.length * 35}>
+        <BarChart
+            data={[...jobData].sort((a, b) => a.value - b.value)}
+            layout="vertical"
+            margin={{ top: 10, right: 20, left: 120, bottom: 10 }}
+        >
+            <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
+
+            <XAxis type="number" />
+
+            <YAxis
+            type="category"
+            dataKey="name"
+            width={10}
+            tick={{ fontSize: 12 }}
+            />
+
+            <Tooltip formatter={formatNumber} />
+
+            <Bar dataKey="value" radius={[0, 10, 10, 0]}>
+            {jobData.map((_, i) => (
+                <Cell
+                key={i}
+                fill={COLORS[i % COLORS.length]}
+                />
             ))}
-          </Bar>
+            </Bar>
         </BarChart>
-      ),
+        </ResponsiveContainer>
+    ),
     },
+    
     {
       title: "Disabilitas",
       content: (
