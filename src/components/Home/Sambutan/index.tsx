@@ -46,7 +46,7 @@ const Sambutan = () => {
             >
               <div className="relative">
                 <Image
-                  src="/images/sambutan/bupati.png"
+                  src="/images/sambutan/lurah.png"
                   alt="Lurah"
                   width={380}
                   height={500}

@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
+import Image from "next/image";
 
 const data = {
   lurah: {
@@ -89,8 +90,20 @@ export default function Organisasi() {
           className="flex justify-center"
         >
           <Card>
-            <div className="text-center space-y-2">
+            <div className="text-center space-y-3 flex flex-col items-center">
+
+              {/* FOTO LURAH */}
+              <div className="w-24 h-24 relative">
+                <Image
+                  src="/images/sambutan/lurah.png"
+                  alt="Foto Lurah"
+                  fill
+                  className="rounded-full object-cover border-4 border-indigo-100 shadow-md"
+                />
+              </div>
+
               <Badge>Lurah</Badge>
+
               <h2 className="text-xl font-bold text-gray-900">
                 {data.lurah.name}
               </h2>
