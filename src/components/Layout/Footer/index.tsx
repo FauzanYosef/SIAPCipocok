@@ -9,54 +9,66 @@ const Footer = () => {
       <div className="container mx-auto lg:max-w-(--breakpoint-xl) px-4">
 
         {/* TOP CONTACT */}
-        <div className="flex flex-col lg:flex-row justify-between gap-8 border-b border-white/10 pb-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 border-b border-white/10 pb-2">
 
           {/* Alamat */}
           <div className="flex items-start gap-4">
             <Icon icon="weui:location-outlined" width="28" />
             <div>
               <p className="font-semibold">Alamat</p>
-              <p className="text-white/70 text-sm">
-                Kelurahan Cipocok Jaya <br />
-                Kota Serang, Banten
+              <p className="text-white/70 text-sm leading-relaxed">
+                Jl. Bhayangkara No 67 
+                Kelurahan Cipocok Jaya
+                Kecamatan Cipocok Jaya
               </p>
+
+              <Link
+                href="https://maps.app.goo.gl/ri387UVuWmYjtJ4h9?g_st=ic"
+                target="_blank"
+                className="text-primary text-xs mt-2 inline-block"
+              >
+                Lihat di Google Maps →
+              </Link>
             </div>
           </div>
 
-          {/* Telepon */}
+          {/* Kontak */}
           <div className="flex items-start gap-4">
             <Icon icon="majesticons:phone-retro-line" width="28" />
             <div>
-              <p className="font-semibold">Telepon</p>
+              <p className="font-semibold">Kontak</p>
+
               <p className="text-white/70 text-sm">
-                (0254) 123456
+                WhatsApp : 0821-2226-5518
               </p>
+
+              <p className="text-white/70 text-sm">
+                Email : cipocokjaya2023@gmail.com
+              </p>
+              
             </div>
+            
           </div>
 
-          {/* Email */}
+          {/* Jam Layanan */}
           <div className="flex items-start gap-4">
-            <Icon icon="clarity:email-line" width="28" />
+            <Icon icon="mdi:clock-outline" width="28" />
             <div>
-              <p className="font-semibold">Email</p>
-              <p className="text-white/70 text-sm">
-                kelurahan@cipocokjaya.go.id
+              <p className="font-semibold">Jam Layanan</p>
+
+              <p className="text-white/70 text-sm leading-relaxed">
+                Senin - Kamis : 
+                08:00 - 12:00 / 13:00 - 16:00
+              </p>
+
+              <p className="text-white/70 text-sm mt-2">
+                Jumat : 
+                08:00 - 11:30 / 13:30 - 16:00
               </p>
             </div>
           </div>
 
-          {/* Sosial Media */}
-          <div className="flex items-center gap-4">
-            <Link href="#" className="hover:text-primary">
-              <Icon icon="fe:facebook" width="28" />
-            </Link>
-            <Link href="#" className="hover:text-primary">
-              <Icon icon="fa6-brands:instagram" width="28" />
-            </Link>
-            <Link href="#" className="hover:text-primary">
-              <Icon icon="fa6-brands:youtube" width="28" />
-            </Link>
-          </div>
+          
 
         </div>
 
