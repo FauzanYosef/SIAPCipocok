@@ -64,7 +64,7 @@ const Hero = () => {
               </Link>
 
               <Link
-                href="/profil/sejarah"
+                href="/profile/sejarah"
                 className="text-17 flex gap-2 items-center text-primary dark:text-white dark:text-opacity-70 hover:text-white bg-white py-3 px-8 shadow-md rounded-lg hover:bg-primary"
               >
                 Profil Kelurahan
