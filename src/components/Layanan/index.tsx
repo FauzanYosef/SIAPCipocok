@@ -94,7 +94,7 @@ const Layanan = () => {
                     rel="noopener noreferrer"
                     className="mt-2 text-md text-primary hover:underline"
                 >
-                    Klik untuk buka Formulir
+                    Klik untuk buka File
                 </a>
                 </div>
             ))}
