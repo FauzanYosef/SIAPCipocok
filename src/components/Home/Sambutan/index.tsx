@@ -118,7 +118,7 @@ const Sambutan = () => {
               {/* NAMA */}
               <motion.div {...textItem(0.8)} className="mt-8">
                 <p className="font-semibold text-gray-800 dark:text-white text-lg">
-                  Nama Lurah
+                  FIKA ANDRIANA HIDAYAT, Amd., AK
                 </p>
                 <p className="text-sm text-gray-500 dark:text-white/60">
                   Lurah Kelurahan Cipocok Jaya

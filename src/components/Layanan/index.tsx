@@ -24,7 +24,7 @@ const Layanan = () => {
   const forms = [
     {
       title: "Pengajuan Surat Keterangan",
-      link: "https://forms.gle/xxxxxxx1",
+      link: "https://drive.google.com/file/d/1HoLo6NB82rUohr82k01DSncrmXIIusEL/view?usp=drivesdk",
     },
     
   ];
